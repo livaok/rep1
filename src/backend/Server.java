@@ -11,7 +11,7 @@ import java.util.List;
 public class Server {
 
 	static final int PORT = 8880;
-	List<ClientHandler> clients = new ArrayList<ClientHandler>();
+	List<RequestHandler> clients = new ArrayList<RequestHandler>();
 
 
 	public Server() {
@@ -24,7 +24,7 @@ public class Server {
 
 			while (true) {
 				clientSocket = serverSocket.accept();
-				ClientHandler client = new ClientHandler(clientSocket, this);
+				RequestHandler client = new RequestHandler(clientSocket, this);
 				clients.add(client);
 				new Thread(client).start();
 			}
@@ -40,19 +40,17 @@ public class Server {
 				e.printStackTrace();
 			}
 		}
-
-
 	}
 
 	public void sendMsgToAllClients(String msg) {
-		for (ClientHandler client : clients) {
+		for (RequestHandler client : clients) {
 			client.sendMsg(msg);
 		}
 	}
 
 
 
-	public void removeClientFromServer(ClientHandler client) {
+	public void removeClientFromServer(RequestHandler client) {
 		clients.remove(client);
 	}
 }

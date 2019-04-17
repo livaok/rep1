@@ -7,7 +7,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class ClientHandler implements Runnable {
+public class RequestHandler implements Runnable {
 
 	private static int clientsCount = 0;
 	private Server server;
@@ -16,7 +16,7 @@ public class ClientHandler implements Runnable {
 	private Scanner inMessage;
 
 
-	public ClientHandler(Socket clientSocket, Server server) {
+	public RequestHandler(Socket clientSocket, Server server) {
 		try {
 			clientsCount++;
 			this.server = server;
